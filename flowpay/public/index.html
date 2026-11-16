@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlowPay · Merchant</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <span class="logo">F</span>
+    <span class="brand">FlowPay</span>
+    <span class="muted small" id="merchant"></span>
+    <span class="spacer"></span>
+    <span class="badge" id="ai-badge">AI parser</span>
+  </header>
+
+  <main class="dash">
+    <section class="stack">
+      <div class="card stack">
+        <h2>New payment request</h2>
+        <div>
+          <label for="nl">Describe it in your own words</label>
+          <textarea id="nl" placeholder="Bill Sara Ahmed 1,200 EGP for website design, split between 3, due Dec 1"></textarea>
+        </div>
+        <button id="parse-btn" class="secondary">✨ Fill the form for me</button>
+        <div id="parse-msg" class="msg warn hidden" role="status"></div>
+
+        <form id="req-form" class="stack" novalidate>
+          <div>
+            <label for="payerName">Payer</label>
+            <input id="payerName" name="payerName" required maxlength="80" placeholder="Customer or company name">
+          </div>
+          <div class="row-3">
+            <div>
+              <label for="amount">Amount</label>
+              <input id="amount" name="amount" type="number" min="0.01" step="0.01" required inputmode="decimal">
+            </div>
+            <div>
+              <label for="currency">Currency</label>
+              <select id="currency" name="currency">
+                <option>EGP</option><option>USD</option><option>EUR</option><option>GBP</option><option>SAR</option><option>AED</option>
+              </select>
+            </div>
+            <div>
+              <label for="splitCount">Split</label>
+              <input id="splitCount" name="splitCount" type="number" min="1" max="50" value="1">
+            </div>
+          </div>
+          <div>
+            <label for="description">For</label>
+            <input id="description" name="description" maxlength="200" placeholder="What is this payment for?">
+          </div>
+          <div>
+            <label for="dueDate">Due date (optional)</label>
+            <input id="dueDate" name="dueDate" type="date">
+          </div>
+          <div id="form-msg" class="msg error hidden" role="alert"></div>
+          <button type="submit" class="block">Create payment link</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="stack">
+      <div class="stats" id="stats"></div>
+      <div class="card">
+        <h2 style="margin-bottom:12px">Payment requests</h2>
+        <div id="list"></div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
